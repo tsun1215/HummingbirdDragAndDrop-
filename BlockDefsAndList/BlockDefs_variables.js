@@ -68,7 +68,7 @@ function B_SetTo(x,y){
 	this.addPart(new LabelText(this,"set"));
 	this.addPart(new VarDropSlot(this));
 	this.addPart(new LabelText(this,"to"));
-	var rS=new RoundSlot(this,Slot.snapTypes.numStrBool,Slot.outputTypes.any,new NumData(0));
+	var rS=new RoundSlot(this,Slot.snapTypes.numStr,Slot.outputTypes.any,new NumData(0));
 	rS.addOption("Enter text",new SelectionData("enter_text"));
 	this.addPart(rS);
 }
@@ -180,7 +180,7 @@ B_List.prototype.checkListUsed=function(list){
 function B_AddToList(x,y){
 	CommandBlock.call(this,x,y,"lists");
 	this.addPart(new LabelText(this,"add"));
-	this.addPart(new RectSlot(this,Slot.snapTypes.numStrBool,Slot.outputTypes.any,"thing"));
+	this.addPart(new RectSlot(this,Slot.snapTypes.numStr,Slot.outputTypes.any,"thing"));
 	this.addPart(new LabelText(this,"to"));
 	this.addPart(new ListDropSlot(this));
 }

@@ -7,7 +7,7 @@
  * @constructor
  * @param {Block} parent - The Block this Slot is a part of. Slots can't change their parents.
  * @param {number [none,num,string,drop]} inputType - The type of Data which can be directly entered into the Slot.
- * @param {number [none,numStrBool,bool,list,any} snapType - The type of Blocks which can be attached to the Slot.
+ * @param {number [none,numStr,bool,list,any} snapType - The type of Blocks which can be attached to the Slot.
  * @param {number [any,num,string,bool,list] - The type of Data the Slot should convert to before outputting.
  */
 function Slot(parent,inputType,snapType,outputType){
@@ -37,7 +37,7 @@ Slot.setConstants=function(){
 	//The type of Blocks which can be attached to the Slot.
 	Slot.snapTypes=function(){};
 	Slot.snapTypes.none=0; //Nothing can attach (dropdowns often)
-	Slot.snapTypes.numStrBool=1; //Blocks with return type num, string, or bool can attach (will be auto cast).
+	Slot.snapTypes.numStr=1; //Blocks with return type num, string, or bool can attach (will be auto cast).
 	Slot.snapTypes.bool=2; //Only Blocks that return bool can attach.
 	Slot.snapTypes.list=3; //Only Blocks that return lists can attach.
 	Slot.snapTypes.any=4; //Any type of Block can attach (used for the = Block).
@@ -219,9 +219,9 @@ Slot.prototype.checkFit=function(returnType){
 		//If the Slot accepts anything, it is compatible.
 		return true;
 	}
-	else if(snapType==sT.numStrBool){
+	else if(snapType==sT.numStr){
 		//Num, string, or bool is compatible.
-		return returnType==rT.num||returnType==rT.string||returnType==rT.bool;
+		return returnType==rT.num||returnType==rT.string;
 	}
 	else if(snapType==sT.bool){
 		//Only bool is compatible.

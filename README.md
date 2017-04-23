@@ -648,7 +648,7 @@ function B_Split(x,y){
     this.addPart(new StringSlot(this,"hello world"));
     this.addPart(new LabelText(this,"by"));
       //New DropSlot which numbers, strings, and bools can snap to
-    var dS=new DropSlot(this,Slot.snapTypes.numStrBool);
+    var dS=new DropSlot(this,Slot.snapTypes.numStr);
       //Add options to select from
       //"enter_text" is a special option; tells InputPad to show prompt dialog
     dS.addOption("Enter text",new SelectionData("enter_text"));

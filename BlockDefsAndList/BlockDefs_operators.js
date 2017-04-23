@@ -368,7 +368,7 @@ function B_Split(x,y){
 	this.addPart(new LabelText(this,"split"));
 	this.addPart(new StringSlot(this,"hello world"));
 	this.addPart(new LabelText(this,"by"));
-	var dS=new DropSlot(this,Slot.snapTypes.numStrBool);
+	var dS=new DropSlot(this,Slot.snapTypes.numStr);
 	dS.addOption("Enter text",new SelectionData("enter_text"));
 	dS.addOption("letter",new SelectionData("letter"));
 	dS.addOption("whitespace",new SelectionData("whitespace"));
@@ -413,7 +413,7 @@ function B_IsAType(x,y){
 	this.addPart(new LabelText(this,"is"));
 	this.addPart(new RectSlot(this,Slot.snapTypes.any,Slot.outputTypes.any,"5"));
 	this.addPart(new LabelText(this,"a"));
-	var dS=new DropSlot(this,Slot.snapTypes.numStrBool);
+	var dS=new DropSlot(this,Slot.snapTypes.numStr);
 	dS.addOption("number",new SelectionData("number"));
 	dS.addOption("text",new SelectionData("text"));
 	dS.addOption("boolean",new SelectionData("boolean"));

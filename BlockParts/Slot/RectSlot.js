@@ -3,7 +3,7 @@
  * It is generally designed to hold a string and its input type is always string.
  * @constructor
  * @param {Block} parent - The Block this Slot is a part of.
- * @param {number [none,numStrBool,bool,list,any} snapType - The type of Blocks which can be attached to the RoundSlot.
+ * @param {number [none,numStr,bool,list,any} snapType - The type of Blocks which can be attached to the RoundSlot.
  * @param {number [any,num,string,bool,list] outputType - The type of Data the RoundSlot should convert to.
  * @param {string} value - The initial string stored in the Slot.
  */

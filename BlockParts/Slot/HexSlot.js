@@ -3,7 +3,7 @@
  * Its input type and output type is always bool.
  * @constructor
  * @param {Block} parent - The Block this Slot is a part of.
- * @param {number [none,numStrBool,bool,list,any} snapType - The type of Blocks which can be attached to the RoundSlot.
+ * @param {number [none,numStr,bool,list,any} snapType - The type of Blocks which can be attached to the RoundSlot.
  */
 function HexSlot(parent,snapType){
 	Slot.call(this,parent,Slot.inputTypes.bool,snapType,Slot.outputTypes.bool); //Call constructor.

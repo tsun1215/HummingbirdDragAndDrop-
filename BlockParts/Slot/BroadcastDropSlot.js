@@ -4,7 +4,7 @@ function BroadcastDropSlot(parent,isHatBlock){
 	if(isHatBlock==null){
 		isHatBlock=false;
 	}
-	var snapType=Slot.snapTypes.numStrBool;
+	var snapType=Slot.snapTypes.numStr;
 	if(isHatBlock){
 		snapType=Slot.snapTypes.none;
 	}

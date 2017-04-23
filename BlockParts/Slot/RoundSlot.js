@@ -4,7 +4,7 @@
  * Its input type, however, is always num.
  * @constructor
  * @param {Block} parent - The Block this Slot is a part of.
- * @param {number [none,numStrBool,bool,list,any} snapType - The type of Blocks which can be attached to the RoundSlot.
+ * @param {number [none,numStr,bool,list,any} snapType - The type of Blocks which can be attached to the RoundSlot.
  * @param {number [any,num,string,bool,list] outputType - The type of Data the RoundSlot should convert to.
  * @param {number} data - The initial data stored in the Slot. Could be string, num, or selection data.
  * @param {boolean} positive - Determines if the NumPad will have the plus/minus Button disabled.

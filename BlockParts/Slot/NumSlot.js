@@ -1,6 +1,6 @@
 /* NumSlot is a subclass of RoundSlot.
  * It creates a RoundSlot optimized for use with numbers.
- * It automatically converts any results into NumData and has a snapType of numStrBool.
+ * It automatically converts any results into NumData and has a snapType of numStr.
  * @constructor
  * @param {Block} parent - The Block this Slot is a part of.
  * @param {number} value - The initial number stored in the Slot.
@@ -15,7 +15,7 @@ function NumSlot(parent,value,positive,integer){
 		integer=false;
 	}
 	//Make RoundSlot.
-	RoundSlot.call(this,parent,Slot.snapTypes.numStrBool,Slot.outputTypes.num,new NumData(value),positive,integer);
+	RoundSlot.call(this,parent,Slot.snapTypes.numStr,Slot.outputTypes.num,new NumData(value),positive,integer);
 }
 NumSlot.prototype = Object.create(RoundSlot.prototype);
 NumSlot.prototype.constructor = NumSlot;
