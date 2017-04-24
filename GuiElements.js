@@ -557,45 +557,39 @@ GuiElements.clip=function(x,y,width,height,element){
  * They return the measurement.
  */
 GuiElements.measure=function(){};
+
+/**
+ * Measures the bounding box of an svg element
+ *
+ * @param      {SVGGraphicsElement}  elem    Element to measure
+ * @return     {Object}              Dimensions of the bounding rectangle ({x,
+ *                                   y, width, height})
+ */
+GuiElements.measure.bbox=function(elem) {
+	let bbox = elem.getBBox();
+	if (bbox.x == 0 && bbox.y == 0 && bbox.width == 0 && bbox.height == 0) {
+		let parent = elem.parentNode;
+		GuiElements.layers.temp.appendChild(elem); // Append to temp to make visible
+		bbox = elem.getBBox();
+		GuiElements.layers.temp.removeChild(elem); // Remove from temp
+		if (parent) {
+			// FIXME: Could be bad because append changes element order. Perhaps
+			// the better solution could be to do elem.cloneNode(true) and add
+			// the clone to the temp layer.
+			parent.appendChild(elem);
+		}
+	}
+	return bbox;
+}
 /* Measures the width of an existing SVG text element.
  * @param {SVG text} textE - The text element to measure.
  * @return {number} - The width of the text element.
  */
 GuiElements.measure.textWidth=function(textE){ //Measures an existing text SVG element
-	return GuiElements.measure.textDim(textE,false);
+	return GuiElements.measure.bbox(textE).width;
 };
 GuiElements.measure.textHeight=function(textE){ //Measures an existing text SVG element
-	return GuiElements.measure.textDim(textE,true);
-};
-/* Measures the width/height of an existing SVG text element.
- * @param {SVG text} textE - The text element to measure.
- * @param {bool} height - true/false for width/height, respectively.
- * @return {number} - The width/height of the text element.
- */
-GuiElements.measure.textDim=function(textE, height){ //Measures an existing text SVG element
-	if(textE.textContent==""){ //If it has no text, the width is 0.
-		return 0;
-	}
-	//Gets the bounding box, but that is 0 if it isn't visible on the screen.
-	var bbox=textE.getBBox();
-	var textD=bbox.width; //Gets the width of the bounding box.
-	if(height){
-		textD=bbox.height; //Gets the height of the bounding box.
-	}
-	if(textD==0){ //The text element probably is not visible on the screen.
-		var parent=textE.parentNode; //Store the text element's current (hidden) parent.
-		GuiElements.layers.temp.appendChild(textE); //Change its parent to one we know is visible.
-		bbox=textE.getBBox(); //Now get its bounding box.
-		textD=bbox.width;
-		if(height){
-			textD=bbox.height;
-		}
-		textE.remove(); //Remove it from the temp layer.
-		if(parent!=null){
-			parent.appendChild(textE); //Add it back to its old parent.
-		}
-	}
-	return textD; //Return the width/height.
+	return GuiElements.measure.bbox(textE).height;
 };
 
 /* Measures the width of a string if it were used to create a text element with certain formatting.
