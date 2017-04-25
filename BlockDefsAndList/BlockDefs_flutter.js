@@ -140,6 +140,13 @@ B_FlutterSoil.prototype = Object.create(B_FlutterSensorBase.prototype);
 B_FlutterSoil.prototype.constructor = B_FlutterSoil;
 
 
+function B_FlutterAir(x, y) {
+	B_FlutterSensorBase.call(this, x, y, "air", "Air Particulate Monitor");
+}
+B_FlutterAir.prototype = Object.create(B_FlutterSensorBase.prototype);
+B_FlutterAir.prototype.constructor = B_FlutterAir;
+
+
 function B_FlutterSound(x, y) {
 	B_FlutterSensorBase.call(this, x, y, "sound", "Sound");
 }

@@ -94,6 +94,7 @@ BlockList.populateCat_flutter=function(category){
 	category.addBlockByName("B_FlutterKnob");
 	category.addBlockByName("B_FlutterSound");
 	category.addBlockByName("B_FlutterSoil");
+	category.addBlockByName("B_FlutterAir");
 	category.trimBottom();
 };
 BlockList.populateCat_motion=function(category){
