@@ -9,8 +9,9 @@
  * @param {number} data - The initial data stored in the Slot. Could be string, num, or selection data.
  * @param {boolean} positive - Determines if the NumPad will have the plus/minus Button disabled.
  * @param {boolean} integer - Determines if the NumPad will have the decimal point Button disabled.
+ * @param {string} helpText - Help text to be displayed on edit
  */
-function RoundSlot(parent,snapType,outputType,data,positive,integer){
+function RoundSlot(parent,snapType,outputType,data,positive,integer,helpText){
 	Slot.call(this,parent,Slot.inputTypes.num,snapType,outputType); //Call constructor.
 	//Entered data stores the data that has been entered using the InputPad.
 	this.enteredData=data; //Set entered data to initial value.
@@ -23,6 +24,7 @@ function RoundSlot(parent,snapType,outputType,data,positive,integer){
 	this.optionsText=new Array(); //The text of the special option.
 	this.optionsData=new Array(); //The Data representing that option (never visible to the user).
 	this.dropColumns=1; //The number of columns to show in the drop down.
+	this.helpText=helpText;
 }
 RoundSlot.prototype = Object.create(Slot.prototype);
 RoundSlot.prototype.constructor = RoundSlot;

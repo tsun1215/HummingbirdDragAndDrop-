@@ -1,3 +1,5 @@
+"use strict";
+
 function InputPad(){
 	InputPad.buildPad();
 }
@@ -46,7 +48,7 @@ InputPad.buildPad=function(){
 	/*IP.makeBg();*/
 	IP.bubbleOverlay=new BubbleOverlay(IP.bg,IP.buttonMargin,IP.group,IP,null,true);
 	IP.bnGroup=GuiElements.create.group(0,0);
-	IP.makeBns();
+	IP.makeBnPad();
 	IP.menuBnList=new MenuBnList(IP.group,0,0,IP.buttonMargin);
 	IP.menuBnList.isOverlayPart=true;
 };
@@ -220,6 +222,23 @@ InputPad.showDropdown=function(slot,x,upperY,lowerY,menuWidth){
 };
 InputPad.showNumPad=function(slot,x,upperY,lowerY,positive,integer){
 	var IP=InputPad;
+	// HACK: There shouldn't be a reason for why InputPad should be a global
+	// class. It would be better to just recreate a number pad when needed since
+	// they don't take a lot of resources and would get garbage collected when
+	// no longer in use.
+	IP.bnGroup.remove();
+	IP.bnGroup = GuiElements.create.group(0,0);
+	if (slot.helpText) {
+		let LabelText = BlockGraphics.labelText;
+		let helpText = GuiElements.draw.text(0, IP.buttonMargin,
+			slot.helpText, LabelText.fontSize, LabelText.fill,
+			LabelText.font, LabelText.fontWeight);
+		let textHeight = GuiElements.measure.textHeight(helpText);
+		IP.bnGroup.appendChild(helpText);
+		IP.makeBnPad(0, textHeight + IP.buttonMargin);
+	} else {
+		IP.makeBnPad(0, 0);
+	}
 	IP.usingNumberPad=true;
 	IP.specialCommand="";
 	IP.width=InputPad.BnAreaW;
@@ -273,7 +292,13 @@ InputPad.showNumPad=function(slot,x,upperY,lowerY,positive,integer){
 	else{
 		IP.decimalBn.enable();
 	}
-	IP.bubbleOverlay.display(x,upperY,lowerY,IP.width,IP.height);
+
+	let bbox = GuiElements.measure.bbox(IP.bnGroup);
+	let bubbleWidth = bbox.x + bbox.width;
+	let bubbleHeight = bbox.y + bbox.height;
+
+	IP.bubbleOverlay.display(x, upperY, lowerY, bubbleWidth, bubbleHeight);
+
 	/*InputPad.move(x,upperY,lowerY);*/
 };
 /*InputPad.move=function(x,upperY,lowerY){
@@ -359,14 +384,20 @@ InputPad.menuBnSelected=function(text,data){
 	IP.close();
 };
 
-InputPad.makeBns=function(){
-	var IP=InputPad;
-	var currentNum;
-	var xPos=0;
-	var yPos=0;
-	for(var i=0;i<3;i++){
+/**
+ * Creates the number pad for the numeric buttons
+ *
+ * @param      {number}  relX    Relative x coordinate of the button pad
+ * @param      {number}  relY    Relative y coordinate of the button pad
+ */
+InputPad.makeBnPad=function(relX, relY){
+	let IP=InputPad;
+	let currentNum;
+	let xPos=relX;
+	let yPos=relY;
+	for(let i=0;i<3;i++){
 		xPos=0;
-		for(var j=0;j<3;j++){
+		for(let j=0;j<3;j++){
 			currentNum=7-i*3+j;
 			InputPad.makeNumBn(xPos,yPos,currentNum);
 			xPos+=IP.buttonMargin;
@@ -375,11 +406,15 @@ InputPad.makeBns=function(){
 		yPos+=IP.buttonMargin;
 		yPos+=IP.buttonH;
 	}
-	InputPad.makeNumBn(IP.buttonMargin+IP.buttonW,IP.buttonMargin*3+IP.buttonH*3,0);
-	InputPad.makePlusMinusBn(0,IP.buttonMargin*3+IP.buttonH*3);
-	InputPad.makeDecimalBn(IP.buttonMargin*2+IP.buttonW*2,IP.buttonMargin*3+IP.buttonH*3);
-	InputPad.makeBsBn(0,IP.buttonMargin*4+IP.buttonH*4);
-	InputPad.makeOkBn(IP.buttonMargin+IP.longBnW,IP.buttonMargin*4+IP.buttonH*4);
+	// Next Row (+/-, 0, decimal)
+	InputPad.makePlusMinusBn(0, yPos);
+	InputPad.makeNumBn(IP.buttonMargin+IP.buttonW, yPos, 0);
+	InputPad.makeDecimalBn(IP.buttonMargin*2+IP.buttonW*2, yPos);
+	yPos += IP.buttonMargin + IP.buttonH;
+
+	// Next Row (Bksp, OK)
+	InputPad.makeBsBn(0,yPos);
+	InputPad.makeOkBn(IP.buttonMargin+IP.longBnW,yPos);
 };
 InputPad.makeNumBn=function(x,y,num){
 	var IP=InputPad;
