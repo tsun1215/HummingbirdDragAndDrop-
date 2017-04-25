@@ -5,7 +5,7 @@ function B_FlutterServo(x, y) {
 	this.addPart(new DeviceDropSlot(this, FlutterManager));
 	this.addPart(new LabelText(this, "Servo"));
 	this.addPart(new PortSlot(this, 3)); //Positive integer.
-	this.addPart(new NumSlot(this, 0, true, true)); //Positive integer.
+	this.addPart(new NumSlot(this, 0, true, true, "Degrees [0,180]")); //Positive integer.
 }
 B_FlutterServo.prototype = Object.create(CommandBlock.prototype);
 B_FlutterServo.prototype.constructor = B_FlutterServo;
@@ -34,11 +34,11 @@ function B_FlutterTriLed(x, y) {
 	this.addPart(new LabelText(this, "TRI-LED"));
 	this.addPart(new PortSlot(this, 3)); //Positive integer.
 	this.addPart(new LabelText(this, "R"));
-	this.addPart(new NumSlot(this, 0, true, true)); //Positive integer.
+	this.addPart(new NumSlot(this, 0, true, true, "Percent Red [0,100]")); //Positive integer.
 	this.addPart(new LabelText(this, "G"));
-	this.addPart(new NumSlot(this, 0, true, true)); //Positive integer.
+	this.addPart(new NumSlot(this, 0, true, true, "Percent Green [0,100]")); //Positive integer.
 	this.addPart(new LabelText(this, "B"));
-	this.addPart(new NumSlot(this, 0, true, true)); //Positive integer.
+	this.addPart(new NumSlot(this, 0, true, true, "Percent Blue [0,100]")); //Positive integer.
 }
 B_FlutterTriLed.prototype = Object.create(CommandBlock.prototype);
 B_FlutterTriLed.prototype.constructor = B_FlutterTriLed;
