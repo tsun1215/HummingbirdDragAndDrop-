@@ -42,6 +42,11 @@ Sounds.checkNameIsValid=function(soundName){
 	return Sounds.indexFromName(soundName)>=0;
 };
 
+Sounds.playSnapSound = function() {
+	let request = "sound/play/snap";
+	HtmlServer.sendRequest(request);
+}
+
 // Stops all sounds and tones
 Sounds.stopAllSounds=function(){
 	var request = "sound/stop_all"

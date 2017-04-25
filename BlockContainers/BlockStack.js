@@ -294,6 +294,7 @@ BlockStack.prototype.snap=function(block){ //Fix! remove redundant code.
 	oldG.remove();
 	
 	this.updateDim();
+	Sounds.playSnapSound();
 };
 /* Adds an indicator showing that the moving BlockStack will snap onto the top of this BlockStack if released.
  */

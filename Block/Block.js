@@ -512,6 +512,7 @@ Block.prototype.snap=function(block){ //Fix! documentation
 	if(this.stack!=null) {
 		this.stack.updateDim(); //Update the dimensions now that the movement is complete.
 	}
+	Sounds.playSnapSound();
 };
 /* Disconnects this Block from the Blocks above it and returns the new;y-created BlockStack. Calls updateDim on parent.
  * @return {BlockStack} - A BlockStack containing this Block and all subsequent Blocks.

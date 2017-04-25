@@ -65,6 +65,7 @@ BlockSlot.prototype.snap=function(block){
 		block.stack.remove();
 		block.changeStack(this.parent.stack);
 		oldG.remove();
+		Sounds.playSnapSound();
 	}
 	if(stack!=null) {
 		this.parent.stack.updateDim();
